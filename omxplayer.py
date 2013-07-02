@@ -30,6 +30,8 @@ class OMXPlayer(object):
     _QUIT_CMD = 'q'
     _SKIP_AHEAD_CMD = '\x1B[C'
     _SKIP_BACK_CMD = '\x1B[D'
+    _VOLUME_UP_CMD = '+'
+    _VOLUME_DOWN_CMD = '-'
 
     paused = False
     # KRT turn subtitles off as a command option is used
