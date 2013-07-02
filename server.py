@@ -1,4 +1,4 @@
-#! /usr/bin/python2
+#! /usr/bin/python
 
 from bottle import static_file
 from bottle import get, post, request
@@ -80,34 +80,39 @@ def index():
 	return template('index', dir_list=[],file_list=[],dr='',current=playing)
 
 def exec_command(command):
-	global player,playing
-	if command == 'pause':
-		player.toggle_pause()
+    global player,playing
+    if command == 'pause':
+        player.toggle_pause()
 
-	elif command == 'play':
-		if player != None and player.is_running():
-			exec_command('quit')
+    elif command == 'play':
+        if player != None and player.is_running():
+            exec_command('quit')
 
-		ml = urllib.unquote(movie_location)
-		fil = urllib.unquote(request.query.file)
-		if check_input(ml,fil) == False:
-			return None
+        ml = urllib.unquote(movie_location)
+        fil = urllib.unquote(request.query.file)
+        if check_input(ml,fil) == False:
+            return None
 
-		player = omxplayer.OMXPlayer(ml+fil, omxoptions,start_playback=True, do_dict=True)
-		playing = ml+fil
-		print 'Playing: '+str(ml+fil)
+        player = omxplayer.OMXPlayer(ml+fil, omxoptions,start_playback=True, do_dict=True)
+        playing = ml+fil
+        print 'Playing: '+str(ml+fil)
 
-	elif command == 'ahead':
-		player.skip_ahead()
+    elif command == 'ahead':
+        player.skip_ahead()
 
-	elif command == 'back':
-		player.skip_back()
+    elif command == 'back':
+        player.skip_back()
 
-	elif command == 'quit':
-		player.stop()
-		playing = None
-		player = None
+    elif command == 'quit':
+        player.stop()
+        playing = None
+        player = None
 	
+    elif command == 'vol_up':
+        player.vol_up()
+
+    elif command == 'vol_down':
+        player.vol_down()
 
 # check user input is OK
 def check_input (videodir,track):

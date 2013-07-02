@@ -25,8 +25,8 @@ height:25px;
 overflow:visible;
 }
 .display {
-background-image: url('/img/rpi_logo.png');
-background-repeat: no-repeat;
+/*background-image: url('/img/rpi_logo.png');*/
+/*background-repeat: no-repeat;*/
 }
 .time {
 font-weight:bold;
@@ -67,7 +67,7 @@ background-position: -0px -20px;
 }
 .forward {
 float:left;
-background-image: url('/img/player-icons.jpg');
+background-image: url('/img/player-icons2.jpg');
 background-position: -258px -90px;
 height: 50px;
 width: 60px;
@@ -75,6 +75,28 @@ width: 60px;
 .forward:hover {
 background-position: -66px -90px;
 }
+
+.vol_up {
+float:left;
+background-image: url('/img/player-icons2.jpg');
+background-position: -440px -22px;
+height: 50px;
+width: 60px;
+}
+.vol_up:hover {
+background-position: -384px -21px;
+}
+.vol_down {
+float:left;
+background-image: url('/img/player-icons2.jpg');
+background-position: -440px -85px;
+height: 50px;
+width: 60px;
+}
+.vol_down:hover {
+background-position: -383px -81px;
+}
+
 .folder:hover {
 cursor:pointer;
 }

@@ -1,4 +1,4 @@
-movie_location='/media'
-port=8800
-omxoptions = "-o local" 
-player='omxplayer'
+movie_location  ='/media/USB_Data/Video'
+port            = 8800
+omxoptions      = "-r -o local" 
+player          = 'omxplayer'
