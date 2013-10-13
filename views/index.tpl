@@ -14,6 +14,8 @@
 </div>
 <script type="text/javascript">
 
+var playing = false;
+
 String.prototype.toHHMMSS = function () {
     sec_numb    = parseInt(this);
     var hours   = Math.floor(sec_numb / 3600);
@@ -63,30 +65,44 @@ function get_folder(path,node) {
 }
 
 function play(file) {
-  if($('.name').text().toLowerCase()!='not playing') {
+  if (file_loaded()) {
     if(!confirm('There is already a video playing. Do you want to stop it and play "'+unescape(file)+'" instead?')) {
       return;
     } else {
       player('quit');
+      playing = false;
     }
   }
 
   $('.name').html('<img src="/img/loading.gif">');
   $.ajax({url:'/player.ajax', data:{'c':'play','file':file}, success:function(data) {
     $('.name').html(data);
+    playing = true;
   }});
 }
 
 function player(command) {
-  if(command!='position') {
+  if (command!='position') {
     $('.name').html('<img src="/img/loading.gif">');
+  }
+  if (command == 'pause' && file_loaded()) {
+    playing = !playing;    
   }
   $.ajax({url:'/player.ajax', data:{'c':command}, success:function(data) {
     $('.display').html(data);
+    if (playing) {
+      $('.pause').css('background-position', '-192px -23px');
+    } else {
+      $('.pause').css('background-position', '-255px -23px');
+    }
   }});
 }
 
-setInterval(function(){player('position');},5000);
+function file_loaded () {
+  return $('.name').text().toLowerCase() != 'not playing';
+}
+
+setInterval(function(){player('position');},1000);
 
 get_folder('',$('.files').get(0));
 

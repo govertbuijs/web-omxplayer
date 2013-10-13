@@ -4,18 +4,23 @@ import re
 from threading import Thread
 from time import sleep
 
+
 _DURATION_REXP = re.compile(r"(.+)Duration:(.+), start")
 _FILE_INFO_CMD = '/usr/bin/omxplayer -i "%s" %s'
 
+
 def file_info(mediafile, args=None):
-    info = pexpect.spawn( _FILE_INFO_CMD % (mediafile, args) )
+    # mediainfo '--Inform=General;%Duration/String3%' Firefly.S01E01.Serenity.2002.Bluray.576p.x264.AAC-AVX.mkv
     duration = '00:00:00'
+    info = pexpect.spawn( _FILE_INFO_CMD % (mediafile, args) )
     for l in info.readlines():
-        m = _DURATION_REXP.match(l.strip())
-        if m:
-            duration = m.group(2).strip()[11:19]
+        if 'duration' in l.lower():
+            duration = l.split(' ')[3]
+            duration = duration[duration.find(":")-2:duration.find(":")+6]
+    
     return duration
- 
+
+
 class OMXPlayer(object):
 
     _FILEPROP_REXP = re.compile(r".*audio streams (\d+) video streams (\d+) chapters (\d+) subtitles (\d+).*")
@@ -44,7 +49,7 @@ class OMXPlayer(object):
         #******* KenT signals to tell the gui playing has started and ended
         self.start_play_signal = False
         self.end_play_signal=False
-        self.duration = file_info(mediafile,args)
+        self.duration = file_info(mediafile, args)
         cmd = self._LAUNCH_CMD % (mediafile, args)
         self._process = pexpect.spawn(cmd)
         # fout= file('logfile.txt','w')

@@ -14,7 +14,7 @@ height: 100px;
 }
 .folders {
 margin-left:25px;
-background-image: url('/img/dot.png');
+/*background-image: url('/img/dot.png');*/
 background-size: 2px;
 background-repeat: repeat-y;
 padding-left: 10;
@@ -42,9 +42,9 @@ height: 50px;
 width: 60px;
 float:left;
 }
-.quit:hover {
+/*.quit:hover {
 background-position: -125px -90px;
-}
+}*/
 .back {
 float:left;
 background-image: url('/img/player-icons.jpg');
@@ -52,9 +52,9 @@ background-position: -192px -90px;
 height: 50px;
 width: 60px;
 }
-.back:hover {
+/*.back:hover {
 background-position: -0px -90px;
-}
+}*/
 .pause {
 float:left;
 background-image: url('/img/player-icons.jpg');
@@ -62,40 +62,40 @@ background-position: -192px -23px;
 height: 50px;
 width: 60px;
 }
-.pause:hover {
+/*.pause:hover {
 background-position: -0px -20px;
-}
+}*/
 .forward {
 float:left;
-background-image: url('/img/player-icons2.jpg');
+background-image: url('/img/player-icons.jpg');
 background-position: -258px -90px;
 height: 50px;
 width: 60px;
 }
-.forward:hover {
+/*.forward:hover {
 background-position: -66px -90px;
-}
+}*/
 
 .vol_up {
 float:left;
-background-image: url('/img/player-icons2.jpg');
+background-image: url('/img/player-icons.jpg');
 background-position: -440px -22px;
 height: 50px;
 width: 60px;
 }
-.vol_up:hover {
+/*.vol_up:hover {
 background-position: -384px -21px;
-}
+}*/
 .vol_down {
 float:left;
-background-image: url('/img/player-icons2.jpg');
+background-image: url('/img/player-icons.jpg');
 background-position: -440px -85px;
 height: 50px;
 width: 60px;
 }
-.vol_down:hover {
+/*.vol_down:hover {
 background-position: -383px -81px;
-}
+}*/
 
 .folder:hover {
 cursor:pointer;
@@ -107,12 +107,13 @@ padding-left:30px;
 cursor:pointer;
 }
 .expanded {
-background-image:url('/img/collapse.png');
+/*background-image:url('/img/collapse.png');*/
 background-repeat: no-repeat;
 background-size: 20px;
 }
 .collapsed {
-background-image:url('/img/expand.png');
+/*background-image:url('/img/expand.png');*/
+background-image:url('/img/dot.png');
 background-repeat: no-repeat;
 background-size: 20px;
 }
