@@ -1,6 +1,8 @@
 <div class="controls display">
-<div class="name">{{ current or 'Not playing' }}</div>
-<div class="time">00:00:00 / 00:00:00</div>
+  <div class="path">{{ path or 'Not playing' }}</div>
+  <div class="name">{{ name or '' }}</div>
+  <div class="time">00:00:00 / 00:00:00</div>
+  <input type="hidden" id="running" value="{{ running }}">
 </div>
 <div class="controls" style="width:361px">
 <div class="back" onclick="player('back')">&nbsp;</div>
@@ -13,8 +15,6 @@
 <div class="folder_name">Media</div>
 </div>
 <script type="text/javascript">
-
-var playing = false;
 
 String.prototype.toHHMMSS = function () {
     sec_numb    = parseInt(this);
@@ -70,14 +70,13 @@ function play(file) {
       return;
     } else {
       player('quit');
-      playing = false;
     }
   }
 
   $('.name').html('<img src="/img/loading.gif">');
   $.ajax({url:'/player.ajax', data:{'c':'play','file':file}, success:function(data) {
-    $('.name').html(data);
-    playing = true;
+    //$('.name').html(data);
+    $('.display').html(data);
   }});
 }
 
@@ -85,12 +84,10 @@ function player(command) {
   if (command!='position') {
     $('.name').html('<img src="/img/loading.gif">');
   }
-  if (command == 'pause' && file_loaded()) {
-    playing = !playing;    
-  }
   $.ajax({url:'/player.ajax', data:{'c':command}, success:function(data) {
     $('.display').html(data);
-    if (playing) {
+
+    if ($('input#running').val() == 'True') {
       $('.pause').css('background-position', '-192px -23px');
     } else {
       $('.pause').css('background-position', '-255px -23px');
@@ -99,7 +96,7 @@ function player(command) {
 }
 
 function file_loaded () {
-  return $('.name').text().toLowerCase() != 'not playing';
+  return $('.path').text().toLowerCase() != 'not playing';
 }
 
 setInterval(function(){player('position');},1000);

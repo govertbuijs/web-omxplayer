@@ -8,9 +8,11 @@ from threading import Thread
 from config import movie_location,omxoptions
 import os, sys, urllib, omxplayer, config, time
 
-playing = None
 player = None
-		
+playing_path = None
+playing_file = None
+
+
 @route('/img/<filename:path>')
 def send_image(filename):
     return static_file(filename, root='./static/img', mimetype='image/png')
@@ -75,31 +77,36 @@ def info():
 
 @route('/player.ajax')
 def webplayer():
-    global playing
+    global playing_path, playing_file
     if request.query.c != None:
         exec_command(request.query.c)
 
     #time.strftime('%H:%M:%S', time.gmtime(player.position))
-    
+ 
+    pos = None
+    length = None
     try:
         position = timedelta(microseconds=max(0, player.position))
-        return template('player_ajax', 
-                        current = playing, 
-                        pos     = str(position).split('.')[0], 
-                        length  = player.duration)
+        pos = str(position).split('.')[0]
+        if position.seconds < 6000:
+            pos = '0' + pos
+        length = player.duration
     except:
-        return template('player_ajax',
-                        current = playing, 
-                        pos     = '00:00:00',
-                        length  = '00:00:00')
+        pass
+    
+    return template('player_ajax', path = playing_path, 
+            name = playing_file, pos = pos, length = length, 
+            running = running())
+
 
 @route('/')
 def index():
-    return template('index', dir_list=[],file_list=[],dr='',current=playing)
+    return template('index', dir_list = [], file_list = [], dr = '',
+            path = playing_path, name = playing_file, running = running())
 
 
 def exec_command(command):
-    global player, playing
+    global player, playing_path, playing_file
     if command == 'pause' and player != None:
         player.toggle_pause()
 
@@ -116,8 +123,13 @@ def exec_command(command):
                                      omxoptions,
                                      start_playback=True,
                                      do_dict=True)
-        playing = ml+fil
-        print 'Playing: '+str(ml+fil)
+        #playing = ml+fil
+        #print 'Playing: '+str(ml+fil)
+        playing_path = '/'.join(fil.split('/')[0:-1])
+        playing_file = fil.split('/')[-1]
+        print
+        print 'Playing: ' + playing_path +'/'+ playing_file
+        print
 
     elif command == 'ahead' and player != None:
         player.skip_ahead()
@@ -129,7 +141,8 @@ def exec_command(command):
         if player != None:
             player.stop()
         player = None
-        playing = None
+        playing_path = None
+        playing_file = None
 	
     elif command == 'vol_up' and player != None:
         player.vol_up()
@@ -150,5 +163,13 @@ def check_input (videodir, track):
     else:
         print track, " not understood"
         return False
+
+
+def running():
+    if player:
+        return not player.paused
+    else:
+        return False
+
 
 run(host='0.0.0.0', port=config.port)

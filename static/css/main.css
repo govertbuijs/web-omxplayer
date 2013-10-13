@@ -19,6 +19,11 @@ background-size: 2px;
 background-repeat: repeat-y;
 padding-left: 10;
 }
+.path {
+font-weight:bold;
+height:25px;
+overflow:visible;
+}
 .name {
 font-weight:bold;
 height:25px;
@@ -33,7 +38,7 @@ font-weight:bold;
 height:25px;
 }
 .controls {
-height:50px;
+height:75px;
 }
 .quit {
 background-image: url('/img/player-icons.jpg');
