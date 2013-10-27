@@ -14,7 +14,6 @@ height: 100px;
 }
 .folders {
 margin-left:25px;
-/*background-image: url('/img/dot.png');*/
 background-size: 2px;
 background-repeat: repeat-y;
 padding-left: 10;
@@ -30,8 +29,6 @@ height:25px;
 overflow:visible;
 }
 .display {
-/*background-image: url('/img/rpi_logo.png');*/
-/*background-repeat: no-repeat;*/
   height: 75px;
 }
 .time {
@@ -41,75 +38,39 @@ overflow:visible;
 .controls {
   height:50px;
 }
-.quit {
-background-image: url('/img/player-icons.jpg');
-background-position: -322px -90px;
-height: 50px;
-width: 60px;
-float:left;
-}
-/*.quit:hover {
-background-position: -125px -90px;
-}*/
-.back {
-float:left;
-background-image: url('/img/player-icons.jpg');
-background-position: -192px -90px;
-height: 50px;
-width: 60px;
-}
-/*.back:hover {
-background-position: -0px -90px;
-}*/
-.pause {
-float:left;
-background-image: url('/img/player-icons.jpg');
-background-position: -192px -23px;
-height: 50px;
-width: 60px;
-}
-/*.pause:hover {
-background-position: -0px -20px;
-}*/
-.forward {
-float:left;
-background-image: url('/img/player-icons.jpg');
-background-position: -258px -90px;
-height: 50px;
-width: 60px;
-}
-/*.forward:hover {
-background-position: -66px -90px;
-}*/
 
-.vol_up {
-float:left;
-background-image: url('/img/player-icons.jpg');
-background-position: -440px -22px;
-height: 50px;
-width: 60px;
-}
-/*.vol_up:hover {
-background-position: -384px -21px;
-}*/
-.vol_down {
-float:left;
-background-image: url('/img/player-icons.jpg');
-background-position: -440px -85px;
-height: 50px;
-width: 60px;
-}
-/*.vol_down:hover {
-background-position: -383px -81px;
-}*/
-
-
-.toggle_subs {
-  float:left;
+.button {
   background-image: url('/img/player-icons.jpg');
-  background-position: -382px -80px;
+  float:left;
   height: 50px;
-  width: 60px;
+  width: 50px;
+}
+.quit {
+  background-position: -322px -90px;
+}
+.back {
+  background-position: -192px -90px;
+}
+.back2 {
+  background-position: 2px -90px;
+}
+.pause {
+  background-position: -192px -23px;
+}
+.ahead {
+  background-position: -258px -90px;
+}
+.ahead2 {
+  background-position: -62px -90px;
+}
+.vol_up {
+  background-position: -440px -22px;
+}
+.vol_down {
+  background-position: -440px -85px;
+}
+.toggle_subs {
+  background-position: -382px -80px;
 }
 
 .folder:hover {

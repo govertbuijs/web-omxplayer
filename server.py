@@ -134,8 +134,14 @@ def exec_command(command):
     elif command == 'ahead' and player != None:
         player.skip_ahead()
 
+    elif command == 'ahead2' and player != None:
+        player.skip_ahead2()
+
     elif command == 'back' and player != None:
         player.skip_back()
+
+    elif command == 'back2' and player != None:
+        player.skip_back2()
 
     elif command == 'quit':
         if player != None:

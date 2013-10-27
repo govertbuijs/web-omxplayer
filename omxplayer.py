@@ -30,7 +30,6 @@ class OMXPlayer(object):
     _AUDIOPROP_REXP = re.compile(r"Audio codec (\w+) channels (\d+) "\
                                   "samplerate (\d+) bitspersample (\d+).*")
 
-
     # _STATUS_REXP = re.compile(r"V :\s*([\d.]+).*")
     _STATUS_REXP = re.compile(r"M:\s*([\d.]+).*")
     _DONE_REXP = re.compile(r"have a nice day.*")
@@ -39,8 +38,10 @@ class OMXPlayer(object):
     _PAUSE_CMD = 'p'
     _TOGGLE_SUB_CMD = 's'
     _QUIT_CMD = 'q'
-    _SKIP_AHEAD_CMD = '\x1B[C'
-    _SKIP_BACK_CMD = '\x1B[D'
+    _SKIP_AHEAD_CMD     = '\x1B[C'
+    _SKIP_AHEAD_CMD2    = '\x1B[A'
+    _SKIP_BACK_CMD      = '\x1B[D'
+    _SKIP_BACK_CMD2     = '\x1B[B'
     _VOLUME_UP_CMD = '+'
     _VOLUME_DOWN_CMD = '-'
 
@@ -49,7 +50,8 @@ class OMXPlayer(object):
     subtitles_visible = False
 
     #****** KenT added argument to control dictionary generation
-    def __init__(self, mediafile, args=None, start_playback=False, do_dict=False):
+    def __init__(self, mediafile, args=None, 
+                 start_playback=False, do_dict=False):
         if not args:
             args = ""
         # KenT signals to tell the gui playing has started and ended
@@ -109,7 +111,8 @@ class OMXPlayer(object):
         
         # Get file properties
         try:
-            file_props = self._FILEPROP_REXP.match(self._process.readline()).groups()
+            file_props = self._FILEPROP_REXP.match(
+                    self._process.readline()).groups()
         except AttributeError:
             return False        
         (self.audio['streams'], self.video['streams'],
@@ -117,7 +120,8 @@ class OMXPlayer(object):
         
         # Get video properties        
         try:
-            video_props = self._VIDEOPROP_REXP.match(self._process.readline()).groups()
+            video_props = self._VIDEOPROP_REXP.match(
+                    self._process.readline()).groups()
         except AttributeError:
             return False
         self.video['decoder'] = video_props[0]
@@ -166,8 +170,14 @@ class OMXPlayer(object):
     def skip_ahead(self):
         self._process.send(self._SKIP_AHEAD_CMD)
 
+    def skip_ahead2(self):
+        self._process.send(self._SKIP_AHEAD_CMD2)
+
     def skip_back(self):
         self._process.send(self._SKIP_BACK_CMD)
+
+    def skip_back2(self):
+        self._process.send(self._SKIP_BACK_CMD2)
 
     def vol_up(self):
         self._process.send(self._VOLUME_UP_CMD)

@@ -4,16 +4,18 @@
   <div class="time">00:00:00 / 00:00:00</div>
   <input type="hidden" id="running" value="{{ running }}">
 </div>
-<div class="controls" style="width:241px;">
-  <div class="back" onclick="player('back')">&nbsp;</div>
-  <div class="pause" onclick="player('pause')">&nbsp;</div>
-  <div class="quit" onclick="player('quit')">&nbsp;</div>
-  <div class="forward" onclick="player('ahead')">&nbsp;</div>
+<div class="controls" style="width:361px;">
+  <div class="button back2" onclick="player('back2')">&nbsp;</div>
+  <div class="button back" onclick="player('back')">&nbsp;</div>
+  <div class="button pause" onclick="player('pause')">&nbsp;</div>
+  <div class="button quit" onclick="player('quit')">&nbsp;</div>
+  <div class="button ahead" onclick="player('ahead')">&nbsp;</div>
+  <div class="button ahead2" onclick="player('ahead2')">&nbsp;</div>
 </div>
 <div class="controls" style="width:181px;">
-  <div class="vol_up" onclick="player('vol_up')">&nbsp;</div>
-  <div class="vol_down" onclick="player('vol_down')">&nbsp;</div>
-  <div class="toggle_subs" onclick="player('toggle_subs')">&nbsp;</div>
+  <div class="button vol_up" onclick="player('vol_up')">&nbsp;</div>
+  <div class="button vol_down" onclick="player('vol_down')">&nbsp;</div>
+  <div class="button toggle_subs" onclick="player('toggle_subs')">&nbsp;</div>
 </div>
 <div>
   <div class="files collapsed" style="background-image:none;">
