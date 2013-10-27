@@ -150,6 +150,9 @@ def exec_command(command):
     elif command == 'vol_down' and player != None:
         player.vol_down()
 
+    elif command == 'toggle_subs' and player != None:
+        player.toggle_subtitles()
+
 
 # check user input is OK
 def check_input (videodir, track):

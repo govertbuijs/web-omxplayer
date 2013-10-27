@@ -32,13 +32,14 @@ overflow:visible;
 .display {
 /*background-image: url('/img/rpi_logo.png');*/
 /*background-repeat: no-repeat;*/
+  height: 75px;
 }
 .time {
-font-weight:bold;
-height:25px;
+  font-weight:bold;
+  height:25px;
 }
 .controls {
-height:75px;
+  height:50px;
 }
 .quit {
 background-image: url('/img/player-icons.jpg');
@@ -101,6 +102,15 @@ width: 60px;
 /*.vol_down:hover {
 background-position: -383px -81px;
 }*/
+
+
+.toggle_subs {
+  float:left;
+  background-image: url('/img/player-icons.jpg');
+  background-position: -382px -80px;
+  height: 50px;
+  width: 60px;
+}
 
 .folder:hover {
 cursor:pointer;

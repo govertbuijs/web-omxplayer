@@ -131,7 +131,6 @@ class OMXPlayer(object):
             self.current_volume = 0.0
 
 
-
 # ******* KenT added basic command sending function
     def send_command(self,command):
         self._process.send(command)

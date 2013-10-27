@@ -1,18 +1,23 @@
-<div class="controls display">
+<div class="display">
   <div class="path">{{ path or 'Not playing' }}</div>
   <div class="name">{{ name or '' }}</div>
   <div class="time">00:00:00 / 00:00:00</div>
   <input type="hidden" id="running" value="{{ running }}">
 </div>
-<div class="controls" style="width:361px">
-<div class="back" onclick="player('back')">&nbsp;</div>
-<div class="pause" onclick="player('pause')">&nbsp;</div>
-<div class="quit" onclick="player('quit')">&nbsp;</div>
-<div class="forward" onclick="player('ahead')">&nbsp;</div>
-<div class="vol_up" onclick="player('vol_up')">&nbsp;</div>
-<div class="vol_down" onclick="player('vol_down')">&nbsp;</div>
-<div class="files collapsed" style="background-image:none;">
-<div class="folder_name">Media</div>
+<div class="controls" style="width:241px;">
+  <div class="back" onclick="player('back')">&nbsp;</div>
+  <div class="pause" onclick="player('pause')">&nbsp;</div>
+  <div class="quit" onclick="player('quit')">&nbsp;</div>
+  <div class="forward" onclick="player('ahead')">&nbsp;</div>
+</div>
+<div class="controls" style="width:181px;">
+  <div class="vol_up" onclick="player('vol_up')">&nbsp;</div>
+  <div class="vol_down" onclick="player('vol_down')">&nbsp;</div>
+  <div class="toggle_subs" onclick="player('toggle_subs')">&nbsp;</div>
+</div>
+<div>
+  <div class="files collapsed" style="background-image:none;">
+  <div class="folder_name">Media</div>
 </div>
 <script type="text/javascript">
 
