@@ -78,7 +78,7 @@ function play(file) {
     }
   }
 
-  $('.name').html('<img src="/img/loading.gif">');
+  $('.display').html('<img src="/img/loading.gif">');
   $.ajax({url:'/player.ajax', data:{'c':'play','file':file}, success:function(data) {
     //$('.name').html(data);
     $('.display').html(data);
@@ -87,7 +87,7 @@ function play(file) {
 
 function player(command) {
   if (command!='position') {
-    $('.name').html('<img src="/img/loading.gif">');
+    $('.display').html('<img src="/img/loading.gif">');
   }
   $.ajax({url:'/player.ajax', data:{'c':command}, success:function(data) {
     $('.display').html(data);

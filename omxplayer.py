@@ -23,10 +23,16 @@ def file_info(mediafile, args=None):
 
 class OMXPlayer(object):
 
-    _FILEPROP_REXP = re.compile(r".*audio streams (\d+) video streams (\d+) chapters (\d+) subtitles (\d+).*")
-    _VIDEOPROP_REXP = re.compile(r".*Video codec ([\w-]+) width (\d+) height (\d+) profile (\d+) fps ([\d.]+).*")
-    _AUDIOPROP_REXP = re.compile(r"Audio codec (\w+) channels (\d+) samplerate (\d+) bitspersample (\d+).*")
-    _STATUS_REXP = re.compile(r"V :\s*([\d.]+).*")
+    _FILEPROP_REXP = re.compile(r".*audio streams (\d+) video streams (\d+) "\
+                                 "chapters (\d+) subtitles (\d+).*")
+    _VIDEOPROP_REXP = re.compile(r".*Video codec ([\w-]+) width (\d+) height "\
+                                  "(\d+) profile (\d+) fps ([\d.]+).*")
+    _AUDIOPROP_REXP = re.compile(r"Audio codec (\w+) channels (\d+) "\
+                                  "samplerate (\d+) bitspersample (\d+).*")
+
+
+    # _STATUS_REXP = re.compile(r"V :\s*([\d.]+).*")
+    _STATUS_REXP = re.compile(r"M:\s*([\d.]+).*")
     _DONE_REXP = re.compile(r"have a nice day.*")
 
     _LAUNCH_CMD = '/usr/bin/omxplayer -s "%s" %s'
@@ -46,7 +52,7 @@ class OMXPlayer(object):
     def __init__(self, mediafile, args=None, start_playback=False, do_dict=False):
         if not args:
             args = ""
-        #******* KenT signals to tell the gui playing has started and ended
+        # KenT signals to tell the gui playing has started and ended
         self.start_play_signal = False
         self.end_play_signal=False
         self.duration = file_info(mediafile, args)
@@ -55,7 +61,7 @@ class OMXPlayer(object):
         # fout= file('logfile.txt','w')
         # self._process.logfile_send = sys.stdout
         
-        # ******* KenT dictionary generation moved to a function so it can be omitted.
+        # KenT dictionary generation moved to a function so it can be omitted.
         if do_dict:
             self.make_dict()
             
@@ -69,28 +75,30 @@ class OMXPlayer(object):
 
     def _get_position(self):
     
-        # ***** KenT added signals to allow polling for end by a gui event loop and also to check if a track is playing before
-        # sending a command to omxplayer
+        # ***** KenT added signals to allow polling for end by a gui event loop
+        # Also check if a track is playing before sending a cmd to omxplayer
         self.start_play_signal = True  
 
-        # **** KenT Added self.position=0. Required if dictionary creation is commented out. Possibly best to leave it in even if not
-        #         commented out in case gui reads position before it is first written.
+        # **** KenT Added self.position=0. Required if dictionary creation is 
+        # commented out. Possibly best to leave it in even if not commented out
+        # in case gui reads position before it is first written.
         self.position=-100.0
         
         while True:
             index = self._process.expect([self._STATUS_REXP,
-                                            pexpect.TIMEOUT,
-                                            pexpect.EOF,
-                                            self._DONE_REXP])
-            if index == 1: continue
+                                          pexpect.TIMEOUT,
+                                          pexpect.EOF,
+                                          self._DONE_REXP])
+            if index == 1:
+                continue
             elif index in (2, 3):
                 # ******* KenT added
                 self.end_play_signal=True
                 break
             else:
-                self.position = float(self._process.match.group(1))                
+                self.position = float(self._process.match.group(1))
+            
             sleep(0.05)
-
 
 
     def make_dict(self):
@@ -119,7 +127,8 @@ class OMXPlayer(object):
                         
         # Get audio properties
         try:
-            audio_props = self._AUDIOPROP_REXP.match(self._process.readline()).groups()
+            audio_props = self._AUDIOPROP_REXP.match(
+                                self._process.readline()).groups()
         except AttributeError:
             return False       
         self.audio['decoder'] = audio_props[0]
@@ -131,13 +140,14 @@ class OMXPlayer(object):
             self.current_volume = 0.0
 
 
-# ******* KenT added basic command sending function
+    # KenT added basic command sending function
     def send_command(self,command):
         self._process.send(command)
         return True
 
 
-# ******* KenT added test of whether _process is running (not certain this is necessary)
+    # KenT added test of whether _process is running 
+    # (not certain this is necessary)
     def is_running(self):
         return self._process.isalive()
 
