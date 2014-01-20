@@ -5,17 +5,17 @@
   <input type="hidden" id="running" value="{{ running }}">
 </div>
 <div class="controls" style="width:361px;">
-  <div class="button back2" onclick="player('back2')">&nbsp;</div>
-  <div class="button back" onclick="player('back')">&nbsp;</div>
-  <div class="button pause" onclick="player('pause')">&nbsp;</div>
-  <div class="button quit" onclick="player('quit')">&nbsp;</div>
-  <div class="button ahead" onclick="player('ahead')">&nbsp;</div>
-  <div class="button ahead2" onclick="player('ahead2')">&nbsp;</div>
+  <div class="button back2" onclick="player('back2')" title="back2">&nbsp;</div>
+  <div class="button back" onclick="player('back')" title="back">&nbsp;</div>
+  <div class="button pause" onclick="player('pause')" title="pause">&nbsp;</div>
+  <div class="button quit" onclick="player('quit')" title="quit">&nbsp;</div>
+  <div class="button ahead" onclick="player('ahead')" title="ahead">&nbsp;</div>
+  <div class="button ahead2" onclick="player('ahead2')" title="ahead2">&nbsp;</div>
 </div>
 <div class="controls" style="width:181px;">
-  <div class="button vol_up" onclick="player('vol_up')">&nbsp;</div>
-  <div class="button vol_down" onclick="player('vol_down')">&nbsp;</div>
-  <div class="button toggle_subs" onclick="player('toggle_subs')">&nbsp;</div>
+  <div class="button vol_up" onclick="player('vol_up')" title="vol up">&nbsp;</div>
+  <div class="button vol_down" onclick="player('vol_down')" title="vol down">&nbsp;</div>
+  <div class="button toggle_subs" onclick="player('toggle_subs')" title="toggle subs">&nbsp;</div>
 </div>
 <div>
   <div class="files collapsed" style="background-image:none;">
@@ -111,4 +111,4 @@ setInterval(function(){player('position');},1000);
 get_folder('',$('.files').get(0));
 
 </script>
-%rebase layout title='Player'
+%rebase layout title='Raspberry Pi Web OMX Player'

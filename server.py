@@ -55,6 +55,8 @@ def files_ajax():
             if os.path.isdir(urllib.unquote(movie_location+'/'+dr+"/"+i)):
                 d.append([urllib.quote(i),i])
             else:
+                if i.endswith((".srt", ".txt")):
+                    continue
                 f.append([urllib.quote(i),i])
         f.sort(comparator)
         d.sort(comparator)
